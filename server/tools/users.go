@@ -31,6 +31,22 @@ func UserExists(username string, db *sql.DB) (bool, error) {
 	return true, nil
 }
 
+func UserFromUsername(username string, db *sql.DB) (data.User, error) {
+
+	row := db.QueryRow("SELECT * FROM users WHERE username = $1", username)
+
+	var id *uint32
+	var username_db *string
+	var password *string
+
+	err := row.Scan(&id, &username_db, &password)
+	if err != nil {
+		return data.User{}, err
+	}
+
+	return data.User{Id: *id, Username: *username_db, Password_hash: *password}, nil
+}
+
 func UserInsert(user data.User, db *sql.DB) error {
 
 	_, err := db.Exec("INSERT INTO users(username, password_hash) VALUES ($1, $2)", user.Username, user.Password_hash)
