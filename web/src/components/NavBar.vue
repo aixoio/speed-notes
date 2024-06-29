@@ -14,11 +14,11 @@
 import router from '@/router';
 
 function home() {
-  router.push("home")
+  router.push({ name: "home" })
 }
 
 function signup() {
-  router.push("signup")
+  router.push({ name: "signup" })
 }
 
 </script>
