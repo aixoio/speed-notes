@@ -1,8 +1,11 @@
 package router
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/aixoio/speed-notes/server/env"
+	"github.com/gofiber/fiber/v2"
+)
 
-func StartRouter() {
+func StartRouter(cfg env.Config) {
 	app := fiber.New()
 
 	app.Listen(":8080")
