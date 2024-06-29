@@ -5,7 +5,10 @@ import (
 	"regexp"
 
 	"github.com/aixoio/speed-notes/server/data"
+	"golang.org/x/crypto/bcrypt"
 )
+
+const BCRYPT_COST = 14
 
 func IsUsernameValid(un string) bool {
 	return !regexp.MustCompile("[^A-z0-9]+").MatchString(un)
@@ -33,4 +36,13 @@ func UserInsert(user data.User, db *sql.DB) error {
 	_, err := db.Exec("INSERT INTO users(username, password_hash) VALUES ($1, $2)", user.Username, user.Password_hash)
 
 	return err
+}
+
+func HashPassword(pwd string) (string, error) {
+	hash, err := bcrypt.GenerateFromPassword([]byte(pwd), BCRYPT_COST)
+	return string(hash), err
+}
+
+func VerifyPassword(hash string, pwd string) bool {
+	return bcrypt.CompareHashAndPassword([]byte(hash), []byte(pwd)) == nil
 }
