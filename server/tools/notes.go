@@ -29,3 +29,9 @@ func AllNotesByUserID(uid uint32, db *sql.DB) ([]data.Note, error) {
 
 	return notes, nil
 }
+
+func InsertNewNote(uid uint32, title, content string, db *sql.DB) (uint32, error) {
+	var note_id *uint32
+	err := db.QueryRow("INSERT INTO notes(user_id, title, content) VALUES ($1, $2, $3) RETURNING id", uid, title, content).Scan(&note_id)
+	return *note_id, err
+}
