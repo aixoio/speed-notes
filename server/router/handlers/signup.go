@@ -17,30 +17,30 @@ func SignupHandler(c *fiber.Ctx) error {
 	var dat signup_request
 
 	if err := c.BodyParser(&dat); err != nil {
-		return fiber.NewError(fiber.StatusBadRequest, "Cannot parse request body")
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Cannot parse request body"})
 	}
 
 	if !tools.IsUsernameValid(dat.Username) {
-		return fiber.NewError(fiber.StatusBadRequest, "The username is invalid")
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "The username is invalid"})
 	}
 
 	exists, err := tools.UserExists(dat.Username, DB)
 	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Cannot check username")
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot check username"})
 	}
 
 	if exists {
-		return fiber.NewError(fiber.StatusConflict, "The username is taken")
+		return c.Status(fiber.StatusConflict).JSON(fiber.Map{"error": "The username is taken"})
 	}
 
 	pwd_hash, err := tools.HashPassword(dat.Password)
 	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Cannot hash password")
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot hash password"})
 	}
 
 	err = tools.UserInsert(data.User{Username: dat.Username, Password_hash: pwd_hash}, DB)
 	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "PostgreSQL cannot insert user")
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "PostgreSQL cannot insert user"})
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(map[string]string{
