@@ -26,5 +26,7 @@ func StartRouter(cfg env.Config, db *sql.DB) {
 		SigningKey: jwtware.SigningKey{Key: cfg.Jwt_secret},
 	}))
 
+	app.Get("/notes", handlers.NotesHandlers)
+
 	app.Listen(fmt.Sprintf(":%s", cfg.Port))
 }
