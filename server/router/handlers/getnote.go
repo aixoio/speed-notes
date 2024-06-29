@@ -23,7 +23,7 @@ func GetNoteHandler(c *fiber.Ctx) error {
 
 	note, err := tools.NoteByID(uint32(note_id), DB)
 	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "PostgreSQL cannot find note"})
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "PostgreSQL cannot find note"})
 	}
 
 	if note.User_id != uid {
