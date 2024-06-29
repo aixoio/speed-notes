@@ -18,6 +18,7 @@ func StartRouter(cfg env.Config, db *sql.DB) {
 	app.Use(logger.New())
 
 	app.Post("/signup", handlers.SignupHandler)
+	app.Post("/login", handlers.LoginHandler)
 
 	app.Listen(fmt.Sprintf(":%s", cfg.Port))
 }
