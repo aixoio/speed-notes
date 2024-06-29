@@ -46,6 +46,6 @@ func UpdateNoteHandler(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(fiber.Map{
-		"status": "UPDATED"
+		"status": "UPDATED",
 	})
 }
