@@ -13,6 +13,7 @@ import (
 
 func StartRouter(cfg env.Config, db *sql.DB) {
 	handlers.DB = db
+	handlers.CFG = cfg
 
 	app := fiber.New()
 

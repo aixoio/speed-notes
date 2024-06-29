@@ -1,8 +1,11 @@
 package handlers
 
 import (
+	"time"
+
 	"github.com/aixoio/speed-notes/server/tools"
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 type login_request struct {
@@ -41,4 +44,17 @@ func LoginHandler(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Bad Password"})
 	}
 
+	claims := jwt.MapClaims{
+		"id":  user.Id,
+		"exp": time.Now().Add((time.Hour * 24) * 30).Unix(),
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
+	jwt_token, err := token.SignedString(CFG.Jwt_secret)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Cannot not create JWT"})
+	}
+
+	return c.JSON(fiber.Map{"jwt": jwt_token})
 }
