@@ -2,7 +2,7 @@
     <div>
         <NavBar></NavBar>
         <div class="flex justify-center m-4">
-            <h1 class="text-4xl font-mono">Speed notes, notes made easy</h1>
+            <h1 class="text-4xl font-mono">Signup</h1>
         </div>
     </div>
 </template>
