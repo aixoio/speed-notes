@@ -45,3 +45,20 @@ func InsertNewNote(uid uint32, title, content string, db *sql.DB) (uint32, error
 	}
 	return *note_id, nil
 }
+
+func NoteByID(id uint32, db *sql.DB) (data.Note, error) {
+	var note_id *uint32
+	var user_id *uint32
+	var title *string
+	var contents *string
+	err := db.QueryRow("SELECT * FROM notes WHERE id = $1", id).Scan(&note_id, &user_id, &title, &contents)
+	if err != nil {
+		return data.Note{}, err
+	}
+	return data.Note{
+		Id:       *note_id,
+		User_id:  *user_id,
+		Title:    *title,
+		Contents: *contents,
+	}, nil
+}
