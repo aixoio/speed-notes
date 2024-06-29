@@ -10,8 +10,18 @@ func IsUsernameValid(un string) bool {
 }
 
 func UserExists(username string, db *sql.DB) (bool, error) {
-	if !IsUsernameValid(username) {
+
+	row := db.QueryRow("SELECT id FROM users WHERE username = $1", username)
+
+	var _id *uint = nil
+
+	err := row.Scan(&_id)
+	if err == sql.ErrNoRows {
 		return false, nil
 	}
+	if err != nil {
+		return false, err
+	}
 
+	return true, nil
 }
