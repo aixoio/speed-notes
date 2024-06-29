@@ -64,5 +64,6 @@ func NoteByID(id uint32, db *sql.DB) (data.Note, error) {
 }
 
 func UpdateNoteByID(title, contents string, note_id uint32, db *sql.DB) error {
-	return nil
+	_, err := db.Exec("UPDATE notes SET title = $1, contents = $2 WHERE id = $3", title, contents, note_id)
+	return err
 }
