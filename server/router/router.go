@@ -9,10 +9,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-var DB *sql.DB
-
 func StartRouter(cfg env.Config, db *sql.DB) {
-	DB = db
+	handlers.DB = db
 
 	app := fiber.New()
 
