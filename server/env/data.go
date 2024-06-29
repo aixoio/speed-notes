@@ -1,5 +1,6 @@
 package env
 
 type Config struct {
-	Port string
+	Port           string
+	Postgresql_url string
 }
