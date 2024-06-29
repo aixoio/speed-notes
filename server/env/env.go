@@ -13,7 +13,7 @@ func LoadConfig() Config {
 		return Config{
 			Port:           os.Getenv("PORT"),
 			Postgresql_url: os.Getenv("POSTGRESQL_URL"),
-			Jwt_secret:     os.Getenv("JWT_SECRET"),
+			Jwt_secret:     []byte(os.Getenv("JWT_SECRET")),
 		}
 	}
 	return cfg
@@ -38,6 +38,6 @@ func loadFromSystem() (Config, bool) {
 	return Config{
 		Port:           port,
 		Postgresql_url: postgresql_url,
-		Jwt_secret:     jwt_secret,
+		Jwt_secret:     []byte(jwt_secret),
 	}, true
 }
