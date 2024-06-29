@@ -46,6 +46,7 @@ func LoginHandler(c *fiber.Ctx) error {
 
 	claims := jwt.MapClaims{
 		"username": user.Username,
+		"id":       user.Id,
 		"exp":      time.Now().Add((time.Hour * 24) * 30).Unix(),
 	}
 
