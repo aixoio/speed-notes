@@ -10,5 +10,8 @@ func IsUsernameValid(un string) bool {
 }
 
 func UserExists(username string, db *sql.DB) (bool, error) {
+	if !IsUsernameValid(username) {
+		return false, nil
+	}
 
 }
