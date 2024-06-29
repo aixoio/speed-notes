@@ -10,7 +10,7 @@ import (
 
 type update_note_request struct {
 	Title    string `json:"title"`
-	Contents string `json:"contents"`
+	Contents string `json:"content"`
 }
 
 func UpdateNoteHandler(c *fiber.Ctx) error {
