@@ -1,6 +1,7 @@
 package router
 
 import (
+	"database/sql"
 	"fmt"
 
 	"github.com/aixoio/speed-notes/server/env"
@@ -8,7 +9,11 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func StartRouter(cfg env.Config) {
+var DB *sql.DB
+
+func StartRouter(cfg env.Config, db *sql.DB) {
+	DB = db
+
 	app := fiber.New()
 
 	app.Post("/signup", handlers.SignupHandler)

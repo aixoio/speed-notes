@@ -14,5 +14,5 @@ func main() {
 		panic(err)
 	}
 
-	router.StartRouter(cfg)
+	router.StartRouter(cfg, db)
 }
