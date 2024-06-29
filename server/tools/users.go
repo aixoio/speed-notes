@@ -3,6 +3,8 @@ package tools
 import (
 	"database/sql"
 	"regexp"
+
+	"github.com/aixoio/speed-notes/server/data"
 )
 
 func IsUsernameValid(un string) bool {
@@ -24,4 +26,9 @@ func UserExists(username string, db *sql.DB) (bool, error) {
 	}
 
 	return true, nil
+}
+
+func UserInsert(user data.User, db *sql.DB) error {
+
+	return nil
 }
