@@ -30,5 +30,7 @@ func UserExists(username string, db *sql.DB) (bool, error) {
 
 func UserInsert(user data.User, db *sql.DB) error {
 
-	return nil
+	_, err := db.Exec("INSERT INTO users(username, password_hash) VALUES ($1, $2)", user.Username, user.Password_hash)
+
+	return err
 }
