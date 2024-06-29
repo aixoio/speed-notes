@@ -1,16 +1,13 @@
 <template>
   <div>
-    <div class="flex justify-between border-b border-b-gray-950">
-      <div class="flex items-center align-middle">
-        <h1 class="text-3xl">Speed notes</h1>
-      </div>
-      <div class="flex gap-2">
-        <button class="btn">Signup</button>
-        <button class="btn">Login</button>
-      </div>
-    </div>
+    <NavBar></NavBar>
     <div class="flex justify-center m-4">
       <h1 class="text-4xl font-mono">Speed notes, notes made easy</h1>
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+import NavBar from '@/components/NavBar.vue';
+
+</script>
