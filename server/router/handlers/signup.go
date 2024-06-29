@@ -29,7 +29,7 @@ func SignupHandler(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusInternalServerError, "Cannot check username")
 	}
 
-	if !exists {
+	if exists {
 		return fiber.NewError(fiber.StatusConflict, "The username is taken")
 	}
 
