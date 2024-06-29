@@ -62,3 +62,7 @@ func NoteByID(id uint32, db *sql.DB) (data.Note, error) {
 		Contents: *contents,
 	}, nil
 }
+
+func UpdateNoteByID(title, contents string, note_id uint32, db *sql.DB) error {
+	return nil
+}
