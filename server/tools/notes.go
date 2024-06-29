@@ -67,3 +67,8 @@ func UpdateNoteByID(title, contents string, note_id uint32, db *sql.DB) error {
 	_, err := db.Exec("UPDATE notes SET title = $1, contents = $2 WHERE id = $3", title, contents, note_id)
 	return err
 }
+
+func DeleteNoteByID(note_id uint32, db *sql.DB) error {
+	_, err := db.Exec("DELETE FROM notes WHERE id = $1", note_id)
+	return err
+}
