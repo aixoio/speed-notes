@@ -4,6 +4,8 @@ import (
 	"database/sql"
 
 	"github.com/aixoio/speed-notes/server/env"
+
+	_ "github.com/lib/pq"
 )
 
 func Connect(cfg env.Config) (*sql.DB, error) {
