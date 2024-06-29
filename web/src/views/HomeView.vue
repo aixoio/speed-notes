@@ -9,5 +9,8 @@
         <button class="btn">Login</button>
       </div>
     </div>
+    <div class="flex justify-center m-4">
+      <h1 class="text-4xl font-mono">Speed notes, notes made easy</h1>
+    </div>
   </div>
 </template>
