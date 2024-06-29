@@ -25,6 +25,13 @@ func AllNotesByUserID(uid uint32, db *sql.DB) ([]data.Note, error) {
 		if err != nil {
 			return []data.Note{}, err
 		}
+
+		notes = append(notes, data.Note{
+			Id:       *id,
+			User_id:  *uid,
+			Title:    *content,
+			Contents: *content,
+		})
 	}
 
 	return notes, nil
