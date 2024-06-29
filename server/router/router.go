@@ -27,7 +27,7 @@ func StartRouter(cfg env.Config, db *sql.DB) {
 	}))
 
 	app.Get("/notes", handlers.NotesHandlers)
-	app.Get("/notes/new", handlers.NewNoteHandler)
+	app.Post("/notes/new", handlers.NewNoteHandler)
 
 	app.Listen(fmt.Sprintf(":%s", cfg.Port))
 }
