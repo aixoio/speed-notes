@@ -44,6 +44,6 @@ func SignupHandler(c *fiber.Ctx) error {
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(map[string]string{
-		"success": "CREATED",
+		"status": "CREATED",
 	})
 }
