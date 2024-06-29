@@ -19,18 +19,18 @@ func StartRouter(cfg env.Config, db *sql.DB) {
 
 	app.Use(logger.New())
 
-	app.Post("/signup", handlers.SignupHandler)
-	app.Post("/login", handlers.LoginHandler)
+	app.Post("/api/signup", handlers.SignupHandler)
+	app.Post("/api/login", handlers.LoginHandler)
 
 	app.Use(jwtware.New(jwtware.Config{
 		SigningKey: jwtware.SigningKey{Key: cfg.Jwt_secret},
 	}))
 
-	app.Get("/notes", handlers.NotesHandlers)
-	app.Post("/notes/new", handlers.NewNoteHandler)
-	app.Get("/notes/get/:id", handlers.GetNoteHandler)
-	app.Post("/notes/update/:id", handlers.UpdateNoteHandler)
-	app.Post("/notes/delete/:id", handlers.DeleteNoteHandler)
+	app.Get("/api/notes", handlers.NotesHandlers)
+	app.Post("/api/notes/new", handlers.NewNoteHandler)
+	app.Get("/api/notes/get/:id", handlers.GetNoteHandler)
+	app.Post("/api/notes/update/:id", handlers.UpdateNoteHandler)
+	app.Post("/api/notes/delete/:id", handlers.DeleteNoteHandler)
 
 	app.Listen(fmt.Sprintf(":%s", cfg.Port))
 }
