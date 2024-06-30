@@ -22,11 +22,13 @@
 </template>
 
 <script lang="ts" setup>
+import { NewNote } from '@/assets/ts/tools/notes';
 import DashNavBar from '@/components/DashNavBar.vue';
+import router from '@/router';
 import { useNotesStore } from '@/stores/notesstore';
 import { useUserStore } from '@/stores/userstore';
 import { isEmpty } from 'lodash';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const title = ref("")
 const content = ref("")
@@ -35,11 +37,28 @@ const error = ref("")
 const userStore = useUserStore()
 const notesStore = useNotesStore()
 
-function create() {
+onMounted(async () => {
+    if (userStore.jwt == null) {
+        router.push({ name: "login" })
+    }
+})
+
+
+async function create() {
     if (isEmpty(title.value.trim()) || isEmpty(content.value.trim())) {
         error.value = "You must enter a title and content"
         return
     }
+
+    const res = await NewNote(userStore.jwt as string, title.value, content.value)
+    if (res.error != null) {
+        error.value = res.error as string
+        return
+    }
+
+    
+
+    error.value = ""
 }
 
 </script>
