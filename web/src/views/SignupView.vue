@@ -24,6 +24,7 @@
 import NavBar from '@/components/NavBar.vue';
 import { ref } from 'vue';
 import { isEmpty } from "lodash"
+import { UsernameIsValid } from '@/assets/ts/user';
 
 
 let username = ref("");
@@ -35,6 +36,15 @@ function signup() {
         error.value = "You must enter a username and password"
         return
     }
+
+    if (!UsernameIsValid(username.value)) {
+        error.value = "Your username is invalid"
+        return
+    }
+
+    error.value = ""
+    return
+
 }
 
 </script>
