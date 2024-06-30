@@ -10,6 +10,28 @@ export interface Delete_Note_reply {
     error?: string
 }
 
+export interface Update_Note_reply {
+    status?: string
+    error?: string
+}
+
+export async function UpdateNote(jwt: string, title: string, content: string, note_id: number): Promise<Update_Note_reply> {
+    const result = await fetch(`/api/notes/update/${note_id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwt}`,
+        },
+        body: JSON.stringify({
+            title,
+            content,
+        }),
+    })
+    const data: Update_Note_reply = await result.json()
+
+    return data
+}
+
 export async function NewNote(jwt: string, title: string, content: string): Promise<Note_reply> {
     const result = await fetch("/api/notes/new", {
         method: "POST",

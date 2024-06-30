@@ -13,7 +13,7 @@
                 <textarea type="text" placeholder="Note"
                     class="border border-gray-950 rounded-lg m-4 bg-gray-50 p-2 outline-none resize-none"
                     v-model="content" rows="5"></textarea>
-                <button class="btn" @click.prevent="">Save</button>
+                <button class="btn" @click.prevent="save">Save</button>
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 import type { Note } from '@/assets/ts/data/note';
-import { GetNote } from '@/assets/ts/tools/notes';
+import { GetNote, UpdateNote } from '@/assets/ts/tools/notes';
 import DashNavBar from '@/components/DashNavBar.vue';
 import router from '@/router';
 import { useUserStore } from '@/stores/userstore';
@@ -57,5 +57,15 @@ onMounted(async () => {
     content.value = note.value.contents
 
 })
+
+async function save() {
+    const result = await UpdateNote(userStore.jwt as string, title.value, content.value, note.value?.id as number)
+    if (result.error != null) {
+        alert(result.error)
+        return
+    }
+
+    router.push({ name: "dash" })
+}
 
 </script>
