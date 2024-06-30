@@ -27,11 +27,14 @@ import { ref } from 'vue';
 import { isEmpty } from "lodash"
 import { UsernameIsValid } from '@/assets/ts/user';
 import { loginUser } from '@/assets/ts/tools/user';
+import { useUserStore } from '@/stores/userstore';
 
 
 let username = ref("");
 let password = ref("");
 let error = ref("");
+
+const userStore = useUserStore()
 
 async function login() {
     if (isEmpty(username.value.trim()) || isEmpty(password.value.trim())) {
@@ -50,8 +53,7 @@ async function login() {
         return
     }
 
-    console.log(data.jwt as string);
-    
+    userStore.setJwt(data.jwt as string)
 }
 
 </script>
