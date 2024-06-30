@@ -13,14 +13,15 @@
                         </svg>
                     </PopoverButton>
 
-                    <PopoverPanel
-                        class="z-50 bg-slate-50 border border-gray-950 rounded p-2 m-2 absolute cursor-default">
+                    <PopoverPanel v-slot="{ close }"
+                        class="z-50 bg-slate-50 border border-gray-950 rounded p-2 m-2 absolute cursor-default shadow-xl">
                         <span class="font-bold">Are you sure you want to delete this note?</span>
                         <div class="flex gap-2 justify-end">
                             <button
                                 class="p-2 border border-gray-950 rounded-2xl bg-gray-100 text-lg cursor-pointer hover:bg-transparent shadow hover:shadow-md">Yes</button>
                             <button
-                                class="p-2 border border-gray-950 rounded-2xl bg-gray-100 text-lg cursor-pointer hover:bg-transparent shadow hover:shadow-md">No</button>
+                                class="p-2 border border-gray-950 rounded-2xl bg-gray-100 text-lg cursor-pointer hover:bg-transparent shadow hover:shadow-md"
+                                @click="close">No</button>
                         </div>
                     </PopoverPanel>
                 </Popover>
