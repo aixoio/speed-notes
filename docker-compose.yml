@@ -23,7 +23,7 @@ services:
       - PORT=8080
       - POSTGRESQL_URL=postgres://speed_notes:speed_notes@db:5432/speed_notes?sslmode=disable
       - JWT_SECRET=speed_notes
-  web:
+  site:
     build: ./web/
     networks:
       - network
