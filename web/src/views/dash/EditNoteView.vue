@@ -9,5 +9,16 @@
 
 <script lang="ts" setup>
 import DashNavBar from '@/components/DashNavBar.vue';
+import router from '@/router';
+import { useUserStore } from '@/stores/userstore';
+import { onMounted } from 'vue';
+
+const userStore = useUserStore()
+
+onMounted(async () => {
+    if (userStore.jwt == null) {
+        router.push({ name: "login" })
+    }
+})
 
 </script>
