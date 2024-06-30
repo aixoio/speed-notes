@@ -56,9 +56,14 @@ async function create() {
         return
     }
 
-    
+    notesStore.addNote({
+        id: res.note_id as number,
+        contents: content.value,
+        title: content.value,
+        user_id: 0
+    })
 
-    error.value = ""
+    router.push({ name: "dash" })
 }
 
 </script>
