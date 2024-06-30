@@ -5,6 +5,11 @@ export interface Note_reply {
     error?: string
 }
 
+export interface Delete_Note_reply {
+    status?: string
+    error?: string
+}
+
 export async function NewNote(jwt: string, title: string, content: string): Promise<Note_reply> {
     const result = await fetch("/api/notes/new", {
         method: "POST",
@@ -31,6 +36,19 @@ export async function Notes(jwt: string): Promise<Note[]> {
         },
     })
     const data: Note[] = await result.json()
+
+    return data
+}
+
+export async function DeleteNote(jwt: string, note_id: number): Promise<Delete_Note_reply> {
+    const result = await fetch(`/api/notes/delete/${note_id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwt}`,
+        },
+    })
+    const data: Delete_Note_reply = await result.json()
 
     return data
 }
