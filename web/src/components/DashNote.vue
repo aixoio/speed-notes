@@ -34,10 +34,17 @@
 
 <script lang="ts" setup>
 import type { Note } from '@/assets/ts/data/note';
+import { useNotesStore } from '@/stores/notesstore';
+import { useUserStore } from '@/stores/userstore';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
 const props = defineProps<{
     note: Note
 }>()
+
+const userStore = useUserStore()
+const notesStore = useNotesStore();
+
+
 
 </script>
