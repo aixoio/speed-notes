@@ -26,6 +26,7 @@ import NavBar from '@/components/NavBar.vue';
 import { ref } from 'vue';
 import { isEmpty } from "lodash"
 import { UsernameIsValid } from '@/assets/ts/user';
+import { loginUser } from '@/assets/ts/tools/user';
 
 
 let username = ref("");
@@ -43,6 +44,14 @@ async function login() {
         return
     }
 
+    const data = await loginUser(username.value, password.value)
+    if (!isEmpty(data.error)) {
+        error.value = data.error as string
+        return
+    }
+
+    console.log(data.jwt as string);
+    
 }
 
 </script>
