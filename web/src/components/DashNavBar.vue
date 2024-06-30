@@ -6,13 +6,16 @@
     <div class="flex gap-2">
       <button class="btn" @click="dash">Dashboard</button>
       <button class="btn" @click="newnote">New note</button>
-      <button class="btn" @click="">Logout</button>
+      <button class="btn" @click="logout">Logout</button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import router from '@/router';
+import { useUserStore } from '@/stores/userstore';
+
+const userStore = useUserStore()
 
 function dash() {
   router.push({ name: "dash" })
@@ -20,6 +23,11 @@ function dash() {
 
 function newnote() {
   router.push({ name: "newnote" })
+}
+
+function logout() {
+  userStore.logout()
+  router.push({ name: "login" })
 }
 
 </script>
