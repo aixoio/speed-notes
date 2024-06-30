@@ -1,8 +1,9 @@
 <template>
     <div>
-        <div class="border border-gray-950 p-2 rounded bg-gray-100 shadow cursor-pointer">
-            <div class="flex gap-2 justify-between">
-                <span class="font-extrabold text-lg text-wrap truncate">{{ props.note.title }}</span>
+        <div class="border border-gray-950 p-2 rounded bg-gray-100 shadow cursor-pointer" @click.self="editnote">
+            <div class="flex gap-2 justify-between" @click.self="editnote">
+                <span class="font-extrabold text-lg text-wrap truncate" @click.self="editnote">{{ props.note.title
+                    }}</span>
                 <Popover v-slot="{ open }">
                     <PopoverButton
                         class="outline-none p-2 m-1 border border-gray-950 rounded-2xl bg-gray-100 text-xl cursor-pointer hover:bg-transparent shadow hover:shadow-lg">
@@ -28,7 +29,7 @@
                 </Popover>
 
             </div>
-            <p class="truncate">{{ props.note.contents }}</p>
+            <p class="truncate" @click.self="editnote">{{ props.note.contents }}</p>
         </div>
     </div>
 </template>
@@ -36,6 +37,7 @@
 <script lang="ts" setup>
 import type { Note } from '@/assets/ts/data/note';
 import { DeleteNote } from '@/assets/ts/tools/notes';
+import router from '@/router';
 import { useNotesStore } from '@/stores/notesstore';
 import { useUserStore } from '@/stores/userstore';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
@@ -57,6 +59,15 @@ async function deleteNote(close: any) {
     }
 
     notesStore.removeNote(props.note)
+}
+
+function editnote() {
+    router.push({
+        name: "editnote",
+        params: {
+            "id": props.note.id,
+        },
+    })
 }
 
 </script>
