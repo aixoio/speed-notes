@@ -59,7 +59,7 @@ async function create() {
     notesStore.addNote({
         id: res.note_id as number,
         contents: content.value,
-        title: content.value,
+        title: title.value,
         user_id: 0
     })
 
