@@ -29,7 +29,7 @@ func AllNotesByUserID(uid uint32, db *sql.DB) ([]data.Note, error) {
 		notes = append(notes, data.Note{
 			Id:       *id,
 			User_id:  *uid,
-			Title:    *content,
+			Title:    *title,
 			Contents: *content,
 		})
 	}
