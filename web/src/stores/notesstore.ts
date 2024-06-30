@@ -9,8 +9,13 @@ export const useNotesStore = defineStore("notes", () => {
         notes.value = notes_dat
     }
 
+    function addNote(note: Note) {
+        notes.value.push(note)
+    }
+
     return {
         notes,
         setNotes,
+        addNote,
     }
 })
