@@ -23,6 +23,11 @@ const router = createRouter({
       name: 'dash',
       component: () => import("../views/dash/DashView.vue"),
     },
+    {
+      path: '/newnote',
+      name: 'newnote',
+      component: () => import("../views/dash/NewNoteView.vue"),
+    },
   ]
 })
 

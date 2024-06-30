@@ -5,7 +5,7 @@
     </div>
     <div class="flex gap-2">
       <button class="btn" @click="dash">Dashboard</button>
-      <button class="btn" @click="">New note</button>
+      <button class="btn" @click="newnote">New note</button>
       <button class="btn" @click="">Logout</button>
     </div>
   </div>
@@ -18,5 +18,8 @@ function dash() {
   router.push({ name: "dash" })
 }
 
+function newnote() {
+  router.push({ name: "newnote" })
+}
 
 </script>
