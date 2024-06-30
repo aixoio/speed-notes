@@ -26,8 +26,6 @@ import NavBar from '@/components/NavBar.vue';
 import { ref } from 'vue';
 import { isEmpty } from "lodash"
 import { UsernameIsValid } from '@/assets/ts/user';
-import { signupUser } from '@/assets/ts/tools/user';
-import router from '@/router';
 
 
 let username = ref("");
