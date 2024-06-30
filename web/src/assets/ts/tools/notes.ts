@@ -40,6 +40,29 @@ export async function Notes(jwt: string): Promise<Note[]> {
     return data
 }
 
+
+export interface Note_reply {
+    id?: number
+    user_id?: number
+    title?: string
+    contents?: string
+    error?: string
+}
+
+
+export async function GetNote(jwt: string, note_id: number): Promise<Note_reply> {
+    const result = await fetch(`/api/notes/get/${note_id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwt}`,
+        },
+    })
+    const data: Note_reply = await result.json()
+
+    return data
+}
+
 export async function DeleteNote(jwt: string, note_id: number): Promise<Delete_Note_reply> {
     const result = await fetch(`/api/notes/delete/${note_id}`, {
         method: "POST",

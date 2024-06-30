@@ -12,7 +12,9 @@ import DashNavBar from '@/components/DashNavBar.vue';
 import router from '@/router';
 import { useUserStore } from '@/stores/userstore';
 import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute()
 const userStore = useUserStore()
 
 onMounted(async () => {
