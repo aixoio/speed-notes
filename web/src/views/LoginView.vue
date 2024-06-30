@@ -28,6 +28,7 @@ import { isEmpty } from "lodash"
 import { UsernameIsValid } from '@/assets/ts/user';
 import { loginUser } from '@/assets/ts/tools/user';
 import { useUserStore } from '@/stores/userstore';
+import router from '@/router';
 
 
 let username = ref("");
@@ -54,6 +55,8 @@ async function login() {
     }
 
     userStore.setJwt(data.jwt as string)
+
+    router.push({ name: "dash" })
 }
 
 </script>
