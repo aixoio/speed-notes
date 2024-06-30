@@ -28,6 +28,11 @@ const router = createRouter({
       name: 'newnote',
       component: () => import("../views/dash/NewNoteView.vue"),
     },
+    {
+      path: '/note/edit/:id',
+      name: 'editnote',
+      component: () => import("../views/dash/EditNoteView.vue"),
+    },
   ]
 })
 
