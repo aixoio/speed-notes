@@ -26,6 +26,7 @@ import { ref } from 'vue';
 import { isEmpty } from "lodash"
 import { UsernameIsValid } from '@/assets/ts/user';
 import { signupUser } from '@/assets/ts/tools/user';
+import router from '@/router';
 
 
 let username = ref("");
@@ -43,11 +44,13 @@ async function signup() {
         return
     }
 
-    error.value = ""
+    const data = await signupUser(username.value, password.value)    
+    if (!isEmpty(data.error)) {
+        error.value = data.error as string
+        return
+    }
     
-    console.log(await signupUser(username.value, password.value));
-    
-
+    router.push({ name: "login" })
 }
 
 </script>
