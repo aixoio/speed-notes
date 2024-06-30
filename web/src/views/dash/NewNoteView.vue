@@ -25,6 +25,7 @@
 import DashNavBar from '@/components/DashNavBar.vue';
 import { useNotesStore } from '@/stores/notesstore';
 import { useUserStore } from '@/stores/userstore';
+import { isEmpty } from 'lodash';
 import { ref } from 'vue';
 
 const title = ref("")
@@ -35,7 +36,10 @@ const userStore = useUserStore()
 const notesStore = useNotesStore()
 
 function create() {
-
+    if (isEmpty(title.value.trim()) || isEmpty(content.value.trim())) {
+        error.value = "You must enter a title and content"
+        return
+    }
 }
 
 </script>
