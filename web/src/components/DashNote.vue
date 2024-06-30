@@ -18,7 +18,8 @@
                         <span class="font-bold">Are you sure you want to delete this note?</span>
                         <div class="flex gap-2 justify-end">
                             <button
-                                class="p-2 border border-gray-950 rounded-2xl bg-gray-100 text-lg cursor-pointer hover:bg-transparent shadow hover:shadow-md">Yes</button>
+                                class="p-2 border border-gray-950 rounded-2xl bg-gray-100 text-lg cursor-pointer hover:bg-transparent shadow hover:shadow-md"
+                                @click="deleteNote(close)">Yes</button>
                             <button
                                 class="p-2 border border-gray-950 rounded-2xl bg-gray-100 text-lg cursor-pointer hover:bg-transparent shadow hover:shadow-md"
                                 @click="close">No</button>
@@ -34,6 +35,7 @@
 
 <script lang="ts" setup>
 import type { Note } from '@/assets/ts/data/note';
+import { DeleteNote } from '@/assets/ts/tools/notes';
 import { useNotesStore } from '@/stores/notesstore';
 import { useUserStore } from '@/stores/userstore';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
@@ -45,6 +47,16 @@ const props = defineProps<{
 const userStore = useUserStore()
 const notesStore = useNotesStore();
 
+async function deleteNote(close: any) {
+    close()
 
+    const res = await DeleteNote(userStore.jwt as string, props.note.id)
+    if (res.error != null) {
+        alert("Cannot delete not")
+        return
+    }
+
+    notesStore.removeNote(props.note)
+}
 
 </script>
