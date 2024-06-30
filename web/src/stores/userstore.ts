@@ -14,9 +14,14 @@ export const useUserStore = defineStore("user", () => {
         localStorage.removeItem("speed_notes_jwt")
     }
 
+    function logedIn(): boolean {
+        return jwt.value != null
+    }
+
     return {
         jwt,
         setJwt,
         logout,
+        logedIn,
     }
 })
