@@ -1,8 +1,8 @@
-version: '3.8'
+version: '3'
 name: 'speednotes'
 services:
   db:
-    build: ./db/
+    build: ./database/
     networks:
       - network
     healthcheck:
