@@ -25,13 +25,14 @@ import NavBar from '@/components/NavBar.vue';
 import { ref } from 'vue';
 import { isEmpty } from "lodash"
 import { UsernameIsValid } from '@/assets/ts/user';
+import { signupUser } from '@/assets/ts/tools/user';
 
 
 let username = ref("");
 let password = ref("");
 let error = ref("");
 
-function signup() {
+async function signup() {
     if (isEmpty(username.value.trim()) || isEmpty(password.value.trim())) {
         error.value = "You must enter a username and password"
         return
@@ -43,7 +44,9 @@ function signup() {
     }
 
     error.value = ""
-    return
+    
+    console.log(await signupUser(username.value, password.value));
+    
 
 }
 
