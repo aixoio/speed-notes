@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="border border-gray-950 p-2 rounded bg-slate-100 shadow cursor-pointer">
+        <div class="border border-gray-950 p-2 rounded bg-gray-100 shadow cursor-pointer">
             <div class="flex gap-2 justify-between">
                 <span class="font-extrabold text-lg text-wrap truncate">{{ props.note.title }}</span>
                 <Popover v-slot="{ open }">
