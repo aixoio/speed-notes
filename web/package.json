@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.22",
     "@types/lodash": "^4.17.6",
     "lodash": "^4.17.21",
     "pinia": "^2.1.7",
