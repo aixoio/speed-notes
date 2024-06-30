@@ -3,14 +3,28 @@
         <div class="border border-gray-950 p-2 rounded bg-slate-100 shadow cursor-pointer">
             <div class="flex gap-2 justify-between">
                 <span class="font-extrabold text-lg text-wrap truncate">{{ props.note.title }}</span>
-                <button
-                    class="p-2 m-1 border border-gray-950 rounded-2xl bg-gray-100 text-xl cursor-pointer hover:bg-transparent shadow hover:shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        class="fill-gray-950">
-                        <path
-                            d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
-                    </svg>
-                </button>
+                <Popover v-slot="{ open }">
+                    <PopoverButton
+                        class="outline-none p-2 m-1 border border-gray-950 rounded-2xl bg-gray-100 text-xl cursor-pointer hover:bg-transparent shadow hover:shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            class="fill-gray-950">
+                            <path
+                                d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                        </svg>
+                    </PopoverButton>
+
+                    <PopoverPanel
+                        class="z-50 bg-slate-50 border border-gray-950 rounded p-2 m-2 absolute cursor-default">
+                        <span class="font-bold">Are you sure you want to delete this note?</span>
+                        <div class="flex gap-2 justify-end">
+                            <button
+                                class="p-2 border border-gray-950 rounded-2xl bg-gray-100 text-lg cursor-pointer hover:bg-transparent shadow hover:shadow-md">Yes</button>
+                            <button
+                                class="p-2 border border-gray-950 rounded-2xl bg-gray-100 text-lg cursor-pointer hover:bg-transparent shadow hover:shadow-md">No</button>
+                        </div>
+                    </PopoverPanel>
+                </Popover>
+
             </div>
             <p class="truncate">{{ props.note.contents }}</p>
         </div>
@@ -19,7 +33,7 @@
 
 <script lang="ts" setup>
 import type { Note } from '@/assets/ts/data/note';
-
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
 const props = defineProps<{
     note: Note
