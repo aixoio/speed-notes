@@ -1,4 +1,3 @@
-
 name: 'speednotes'
 services:
   db:
@@ -18,7 +17,8 @@ services:
     networks:
       - network
     depends_on:
-      db: service_healthy
+      db:
+        condition: service_healthy
     environment:
       - PORT=8080
       - POSTGRESQL_URL=postgres://speed_notes:speed_notes@db:5432/speed_notes?sslmode=disable
@@ -28,14 +28,19 @@ services:
     networks:
       - network
     depends_on:
-      db: service_healthy
-      server: service_started
+      db:
+        condition: service_healthy
+      server:
+        condition: service_started
   nginx:
     build: ./nginx/
     depends_on:
-      db: service_healthy
-      server: service_started
-      site: service_started
+      db:
+        condition: service_healthy
+      server:
+        condition: service_started
+      site:
+        condition: service_started
     networks:
       - network
     ports:
