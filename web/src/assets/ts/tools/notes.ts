@@ -1,3 +1,4 @@
+import type { Note } from "../data/note"
 
 export interface Note_reply {
     note_id?: number
@@ -17,6 +18,19 @@ export async function NewNote(jwt: string, title: string, content: string): Prom
         }),
     })
     const data: Note_reply = await result.json()
+
+    return data
+}
+
+export async function Notes(jwt: string): Promise<Note[]> {
+    const result = await fetch("/api/notes", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwt}`,
+        },
+    })
+    const data: Note[] = await result.json()
 
     return data
 }
