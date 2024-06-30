@@ -5,7 +5,7 @@
         <div class="m-4">
             <h1 class="text-2xl">Notes</h1>
         </div>
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid grid-cols-4 gap-4 mr-60 ml-60">
             <div v-for="note in notesStore.notes">
                 <DashNote :note="note"></DashNote>
             </div>
