@@ -1,0 +1,39 @@
+version: '3.8'
+name: 'speednotes'
+services:
+  db:
+    build: ./db/
+    networks:
+      - network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+    volumes:
+      - ./pgdata/:/var/lib/postgresql/
+  server:
+    build: ./server/
+    networks:
+      - network
+    depends_on:
+      - db
+    environment:
+      - PORT=8080
+      - POSTGRESQL_URL=postgres://speed_notes:speed_notes@db:5432/speed_notes?sslmode=disable
+      - JWT_SECRET=speed_notes
+  web:
+    build: ./web/
+    networks:
+      - network
+    depends_on:
+      - db
+  nginx:
+    build: ./nginx/
+    networks:
+      - network
+    ports:
+      - "80:80"
+networks:
+  network:
